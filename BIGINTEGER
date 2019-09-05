@@ -1,0 +1,53 @@
+#include <iostream>
+#include<string>
+using namespace std;
+
+string reverse_string(string x){
+  int y=x.length()-1;
+  string z="";
+
+  for(int i=0;i<x.length();i++){
+    z.append(1,x[y]);
+    y--;
+  }
+  return z;
+}
+
+string find_sum(string a, string b){
+  if(a.length()<b.length()) 
+   a.swap(b);  
+
+  string str="";
+  string q="";
+  int carry=0;
+
+  string m=reverse_string(a);
+  string n=reverse_string(b);
+
+  for(int i=0;i<b.length();i++){
+      int sum=((m[i]-'0')+(n[i]-'0')+carry);
+      str.append(1,sum%10+'0');
+      carry=sum/10;
+  }  
+
+   for(int j=b.length();j<a.length();j++){
+      int sum=((m[j]-'0')+carry);
+      str.append(1,sum%10+'0');
+      carry=sum/10;
+  }
+
+  if(carry>0){
+      str.append(1,carry+'0');
+  }
+  
+  q=reverse_string(str);
+  return q;  
+}
+
+int main() {
+  string s1="95";
+  string s2="8001";
+  cout<<find_sum(s1,s2)<<endl;
+  return 0;  
+
+}
